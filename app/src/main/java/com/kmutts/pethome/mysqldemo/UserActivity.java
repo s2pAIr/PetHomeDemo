@@ -2,10 +2,15 @@ package com.kmutts.pethome.mysqldemo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -28,6 +33,9 @@ import java.util.ArrayList;
  * Created by ADMIN PC on 11/9/2559.
  */
 public class UserActivity extends AppCompatActivity {
+    DrawerLayout drawerLayout; //Hamburger
+    ActionBarDrawerToggle actionBarDrawerToggle; //Hamburger
+
     private ListView jsonListview;
     private ArrayList<String> exData;
     private ProgressDialog progressDialog;
@@ -36,6 +44,8 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
+
+        initInstances();
 
         jsonListview = (ListView) findViewById(R.id.json_listview);
 
@@ -116,6 +126,40 @@ public class UserActivity extends AppCompatActivity {
             }
         }.execute();
     }
+
+    private void initInstances() {
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout); //Hamburger
+        actionBarDrawerToggle = new ActionBarDrawerToggle(
+                UserActivity.this,
+                drawerLayout,
+                R.string.open_drawer,
+                R.string.close_drawer
+        ); //Hamburger
+        drawerLayout.addDrawerListener(actionBarDrawerToggle); //Hamburger
+
+        getSupportActionBar().setHomeButtonEnabled(true); //Hamburger
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Hamburger
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        actionBarDrawerToggle.syncState(); //Hamburger
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        actionBarDrawerToggle.onConfigurationChanged(newConfig); //Hamburger
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(actionBarDrawerToggle.onOptionsItemSelected(item))
+            return true;//Hamburger
+        return super.onOptionsItemSelected(item);
+    }
+
     public void OpenPost(View view){
         startActivity(new Intent(this,PostActivity.class));
     }

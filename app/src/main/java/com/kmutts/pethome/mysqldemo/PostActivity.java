@@ -1,8 +1,12 @@
 package com.kmutts.pethome.mysqldemo;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -15,10 +19,18 @@ public class PostActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
+        initInstances();
+
+    }
+
+    private void initInstances() {
         postname = (EditText) findViewById(R.id.etPostName);
         description = (EditText) findViewById(R.id.etDescription);
         pettype = (EditText) findViewById(R.id.etPetType);
+
     }
+
 
     public void onPost(View view){
         String str_postname = postname.getText().toString();
