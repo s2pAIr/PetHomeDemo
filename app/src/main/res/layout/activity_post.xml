@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:textSize="32sp"
+        android:text="Post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="25dp"/>
+
+    <EditText
+        android:inputType="text"
+        android:id="@+id/etPostName"
+        android:hint="Post Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:inputType="text"
+        android:id="@+id/etDescription"
+        android:hint="Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:inputType="text"
+        android:id="@+id/etPetType"
+        android:hint="PetType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btPost"
+        android:text="Post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onPost"/>
+</LinearLayout>

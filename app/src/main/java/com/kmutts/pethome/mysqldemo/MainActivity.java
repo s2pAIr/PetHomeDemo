@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         backgroundWorker.execute(type,username,password);
     }
 
+    public void onGuest(View view){
+        startActivity(new Intent(this,GuestActivity.class));
+    }
+
     public void OpenRegister(View view){
         startActivity(new Intent(this,Register.class));
     }

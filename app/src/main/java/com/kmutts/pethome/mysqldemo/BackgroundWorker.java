@@ -2,7 +2,9 @@ package com.kmutts.pethome.mysqldemo;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,10 +21,10 @@ import java.net.URLEncoder;
 /**
  * Created by ADMIN PC on 10/9/2559.
  */
-public class BackgroundWorker extends AsyncTask<String,Void,String> {
+public class BackgroundWorker extends AsyncTask<String,Void,String>  {
     Context context;
     AlertDialog alertDialog;
-    BackgroundWorker (Context ctx){
+    BackgroundWorker(Context ctx){
         context = ctx;
     }
 
@@ -31,6 +33,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
         String type = params[0];
         String login_url = "http://pethome.kmutts.com/login.php";
         String register_url = "http://pethome.kmutts.com/register.php";
+        String post_url = "http://pethome.kmutts.com/post.php";
         if(type.equals("login")){
             try {
                 String user_name = params[1];
@@ -103,6 +106,41 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else if(type.equals("post")){
+            try {
+                String postname = params[1];
+                String description = params[2];
+                String pettype = params[3];
+                URL url = new URL(post_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+                String post_data = URLEncoder.encode("postname","UTF-8")+"="+URLEncoder.encode(postname,"UTF-8")+"&"
+                        +URLEncoder.encode("description","UTF-8")+"="+URLEncoder.encode(description,"UTF-8")+"&"
+                        +URLEncoder.encode("pettype","UTF-8")+"="+URLEncoder.encode(pettype,"UTF-8");
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                String result="";
+                String line="";
+                while((line=bufferedReader.readLine())!=null){
+                    result+=line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
@@ -117,10 +155,13 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     protected void onPostExecute(String result) {
         alertDialog.setMessage(result);
         alertDialog.show();
+        
     }
 
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
     }
+
+
 }
