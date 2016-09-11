@@ -163,4 +163,6 @@ public class UserActivity extends AppCompatActivity {
     public void OpenPost(View view){
         startActivity(new Intent(this,PostActivity.class));
     }
+
+
 }

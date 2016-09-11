@@ -13,10 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="JSON Example"/>
+            
 
             <ListView
                 android:layout_width="match_parent"
@@ -39,14 +36,94 @@
     <LinearLayout
         android:background="#ffffff"
         android:layout_gravity="start"
-        android:layout_width="320dp"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <Button
-            android:text="Button"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:src="@drawable/search3"
+            android:maxHeight="20dp"
+            android:maxWidth="20dp"
+            android:minHeight="20dp"
+            android:minWidth="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/appbar_padding_top"
+            android:text="Pet Home"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SmosStudio@smos.com" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textSize="30dp"
+                android:paddingLeft="40dp"
+                android:textColor="@color/colorBlack"
+                android:layout_marginTop="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Favorite"
+                android:textSize="30dp"
+                android:paddingLeft="40dp"
+                android:textColor="@color/colorBlack"
+                android:layout_marginTop="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Post"
+                android:textSize="30dp"
+                android:paddingLeft="40dp"
+                android:textColor="@color/colorBlack"
+                android:layout_marginTop="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Setting"
+                android:textSize="30dp"
+                android:paddingLeft="40dp"
+                android:textColor="@color/colorBlack"
+                android:layout_marginTop="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Log out"
+                android:textSize="30dp"
+                android:paddingLeft="40dp"
+                android:textColor="@color/colorBlack"
+                android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
