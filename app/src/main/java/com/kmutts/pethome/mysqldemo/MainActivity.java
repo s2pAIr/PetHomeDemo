@@ -23,16 +23,17 @@ public class MainActivity extends AppCompatActivity {
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
         String type = "login";
+
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
         backgroundWorker.execute(type,username,password);
     }
 
-    public void onGuest(View view){
-        startActivity(new Intent(this,GuestActivity.class));
-    }
-
     public void OpenRegister(View view){
         startActivity(new Intent(this,Register.class));
+    }
+
+    public void onGuest(View view){
+        startActivity(new Intent(this,GuestActivity.class));
     }
 
 }

@@ -35,16 +35,11 @@ public class GuestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_main);
+        setContentView(R.layout.activity_guest);
 
         jsonListview = (ListView) findViewById(R.id.json_listview);
 
         exData = new ArrayList<String>();
-        //exData.add("S1");
-        //exData.add("S2");
-        //exData.add("S3");
-        //exData.add("S4");
-        //exData.add("S5");
 
         new AsyncTask<Void,Void,Void>(){
 

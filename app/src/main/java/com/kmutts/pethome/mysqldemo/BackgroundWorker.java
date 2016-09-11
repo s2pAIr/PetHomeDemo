@@ -1,5 +1,6 @@
 package com.kmutts.pethome.mysqldemo;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,8 @@ import java.net.URLEncoder;
 public class BackgroundWorker extends AsyncTask<String,Void,String>  {
     Context context;
     AlertDialog alertDialog;
+    Activity activity;
+
     BackgroundWorker(Context ctx){
         context = ctx;
     }
@@ -135,6 +138,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String>  {
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
+
                 return result;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -153,11 +157,15 @@ public class BackgroundWorker extends AsyncTask<String,Void,String>  {
 
     @Override
     protected void onPostExecute(String result) {
+
+        //activity.startActivity(new Intent(activity, PostActivity.class));
         alertDialog.setMessage(result);
         alertDialog.show();
-        
+        if (result.equalsIgnoreCase("successsuccess")) {
+            Intent i = new Intent(context, UserActivity.class);
+            context.startActivity(i);
+        }
     }
-
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
