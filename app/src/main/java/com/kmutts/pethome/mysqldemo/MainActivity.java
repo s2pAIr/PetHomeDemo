@@ -1,8 +1,8 @@
 package com.kmutts.pethome.mysqldemo;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
 
+
     }
     public void OnLogin(View view){
         String username = etUsername.getText().toString();
@@ -25,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         String type = "login";
 
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-        backgroundWorker.execute(type,username,password);
+        backgroundWorker.execute(type, username, password);
+
     }
 
     public void OpenRegister(View view){
