@@ -25,6 +25,7 @@
 
             </ListView>
         </LinearLayout>
+
         <Button
             android:onClick="OpenPost"
             android:id="@+id/btPost"
@@ -44,10 +45,19 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btLogout"
             android:onClick="goLogout"
-            android:text="Back"
+            android:text="Log out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btGoCustomViewGroup"
+            android:onClick="goCustomViewGroup"
+            android:text="CustomListView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+
 
     </LinearLayout>
 

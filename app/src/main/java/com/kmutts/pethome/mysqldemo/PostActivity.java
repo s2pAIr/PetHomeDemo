@@ -1,5 +1,6 @@
 package com.kmutts.pethome.mysqldemo;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,7 +31,6 @@ public class PostActivity extends AppCompatActivity {
         pettype = (EditText) findViewById(R.id.etPetType);
 
     }
-
 
     public void onPost(View view){
         String str_postname = postname.getText().toString();

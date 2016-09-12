@@ -164,7 +164,13 @@ public class UserActivity extends AppCompatActivity {
         startActivity(new Intent(this,PostActivity.class));
     }
 
+
+
     public void goLogout(View view){
         this.finish();
+    }
+
+    public void goCustomViewGroup(View view){
+        startActivity(new Intent(this,UserCustomListView.class));
     }
 }

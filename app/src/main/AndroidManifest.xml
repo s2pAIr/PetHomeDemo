@@ -21,6 +21,7 @@
         <activity android:name=".GuestActivity"></activity>
         <activity android:name=".PostActivity"></activity>
         <activity android:name=".UserActivity"></activity>
+        <activity android:name=".UserCustomListView"></activity>
     </application>
 
 </manifest>
