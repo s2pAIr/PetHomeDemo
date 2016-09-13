@@ -3,13 +3,15 @@ package com.kmutts.pethome.mysqldemo;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,36 +27,43 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-/**
- * Created by ADMIN PC on 11/9/2559.
- */
-public class GuestActivity extends AppCompatActivity {
-    private ListView jsonListview;
+public class DetailActivity extends AppCompatActivity {
     private ArrayList<String> exData;
     private ArrayList<String> exData2;
     private ArrayList<String> exData3;
+    private ArrayList<String> exData4;
+    private ArrayList<String> exData5;
+    int mealId = -1;
     private ProgressDialog progressDialog;
-    int[] resId = {R.drawable.dog01,R.drawable.dog02,R.drawable.dog03,R.drawable.dog04,R.drawable.dog05,R.drawable.cat01,R.drawable.cat02,R.drawable.cat03,R.drawable.cat04,R.drawable.cat05};
-    String[] name ={"NameDog01","NameDog02","NameDog03","NameDog04","NameDog05","NameCat01","NameCat02","NameCat03","NameCat04","NameCat05"};
-    String[] description = {"DescriptionDog01","DescriptionDog02","DescriptionDog03","DescriptionDog04","DescriptionDog05","DescriptionCat01","DescriptionCat02","DescriptionCat03","DescriptionCat04","DescriptionCat05"};
-
-    @Override
+    EditText comm;
+    Button btComm;
+    private String fakeuseId = 1+"";
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guest);
-
-        jsonListview = (ListView) findViewById(R.id.json_listview);
-
         exData = new ArrayList<String>();
         exData2 = new ArrayList<String>();
         exData3 = new ArrayList<String>();
+        exData4 = new ArrayList<String>();
+        exData5 = new ArrayList<String>();
 
-        new AsyncTask<Void,Void,Void>(){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail);
+
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if(bundle != null){
+            mealId = bundle.getInt("id");
+        }
+
+        comm = (EditText)findViewById(R.id.comm) ;
+        btComm = (Button)findViewById(R.id.btComm);
+        new AsyncTask<Void, Void, Void>() {
 
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                progressDialog = new ProgressDialog(GuestActivity.this);
+                progressDialog = new ProgressDialog(DetailActivity.this);
                 progressDialog.setCancelable(false);
                 progressDialog.setMessage("Downloading ...");
                 progressDialog.show();
@@ -67,7 +76,7 @@ public class GuestActivity extends AppCompatActivity {
 
                     URLConnection urlConnection = url.openConnection();
 
-                    HttpURLConnection httpURLConnection = (HttpURLConnection)urlConnection;
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) urlConnection;
                     httpURLConnection.setAllowUserInteraction(false);
                     httpURLConnection.setInstanceFollowRedirects(true);
                     httpURLConnection.setRequestMethod("GET");
@@ -75,29 +84,34 @@ public class GuestActivity extends AppCompatActivity {
 
                     InputStream inputStream = null;
 
-                    if(httpURLConnection.getResponseCode()==HttpURLConnection.HTTP_OK)
+                    if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK)
                         inputStream = httpURLConnection.getInputStream();
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"),8);
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"), 8);
 
                     StringBuilder stringBuilder = new StringBuilder();
                     String line = null;
 
-                    while ((line=reader.readLine()) != null){
+                    while ((line = reader.readLine()) != null) {
                         stringBuilder.append(line + "\n");
                     }
                     inputStream.close();
-                    Log.d("JSON Result",stringBuilder.toString());
+                    Log.d("JSON Result", stringBuilder.toString());
 
                     JSONObject jsonObject = new JSONObject(stringBuilder.toString());
                     JSONArray exArray = jsonObject.getJSONArray("result");
 
-                    for(int i=0;i<exArray.length();i++){
+                    for (int i = 0; i < exArray.length(); i++) {
+
                         JSONObject jsonObj = exArray.getJSONObject(i);
                         exData.add(jsonObj.getString("postname"));
                         exData2.add(jsonObj.getString("description"));
                         exData3.add(jsonObj.getString("id"));
+                        exData4.add(jsonObj.getString("pettype"));
+                        exData5.add(jsonObj.getString("gender"));
+
                     }
+
 
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -113,24 +127,33 @@ public class GuestActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                ListView listView = (ListView) findViewById(R.id.json_listview);
-                CustomAdapter adapter = new CustomAdapter(getApplicationContext(),exData.toArray(new String[exData.size()]),exData2.toArray(new String[exData2.size()]),resId,exData3.toArray(new String[exData3.size()]));
-                listView.setAdapter(adapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent x = new Intent(getApplicationContext(), DetailActivity.class);
+                int x = -1;
 
-                        x.putExtra("id",Integer.parseInt(view.getTag()+""));
-                        startActivity(x);
-                    }
-                });
-
+                TextView text1 = (TextView) findViewById(R.id.textView3);
+                TextView text2 = (TextView) findViewById(R.id.textView4);
+                TextView text3 = (TextView) findViewById(R.id.textView6);
+                TextView text4 = (TextView) findViewById(R.id.textView7);
+                for(int i =0;i<exData.size();i++){
+                   if((mealId+"").equals(exData3.get(i))){
+                       x = i;
+                   }
+                }
+                text1.setText(exData.get(x)+"");
+                text2.setText(exData2.get(x)+"");
+                text3.setText("ชนิด : "+exData4.get(x));
+                text4.setText("เพศ :  "+exData5.get(x));
                 progressDialog.dismiss();
             }
+
         }.execute();
     }
-    public void OpenPost(View view){
-        startActivity(new Intent(this,PostActivity.class));
+
+    public void onComment(View view){
+        String comment = comm.getText().toString();
+        String postid = mealId+"";
+        String type = "comment";
+        String username = fakeuseId;
+        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+        backgroundWorker.execute(type,username,comment,postid);
     }
 }

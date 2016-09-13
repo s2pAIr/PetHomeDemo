@@ -3,15 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/post"
-        android:title="Search"
-        app:showAsAction="always"
-        android:icon="@drawable/addwithe"
-        />
-    <item
-        android:id="@+id/acserach"
+        android:id="@+id/serach"
         android:title="Search"
         app:showAsAction="always"
         android:icon="@drawable/search3"
         />
+
 </menu>

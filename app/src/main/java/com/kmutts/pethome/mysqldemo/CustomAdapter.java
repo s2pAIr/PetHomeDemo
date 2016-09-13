@@ -15,14 +15,16 @@ public class CustomAdapter extends BaseAdapter {
     Context mContext;
     String[] strName;
     String[] strDescription;
+    String [] id;
     int[] resId;
     //
 
-    public CustomAdapter(Context context, String[] strName,String[] strDescription, int[] resId) {
+    public CustomAdapter(Context context, String[] strName,String[] strDescription, int[] resId,String[] id) {
         this.mContext= context;
         this.strName = strName;
         this.strDescription = strDescription;
         this.resId = resId;
+        this.id = id;
     }
 
     @Override
@@ -54,8 +56,8 @@ public class CustomAdapter extends BaseAdapter {
         tvDescription.setText(strDescription[position]);
 
         ImageView ivImg = (ImageView) view.findViewById(R.id.ivImg);
-        ivImg.setBackgroundResource(resId[position]);
-
+        ivImg.setBackgroundResource(resId[1]);
+        view.setTag(id[position]);
         //View view = mInflater.inflate(R.layout.list_item_photo,parent,false);
         return view;
     }
