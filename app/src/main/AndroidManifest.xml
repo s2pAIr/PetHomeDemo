@@ -23,7 +23,8 @@
         <activity android:name=".UserActivity" />
         <activity android:name=".UserCustomListView" />
         <activity android:name=".DetailActivity" />
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".SearchDetailActivity"></activity>
     </application>
 
 </manifest>

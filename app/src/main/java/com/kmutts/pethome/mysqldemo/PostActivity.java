@@ -82,8 +82,10 @@ public class PostActivity extends AppCompatActivity {
             }else if(r12.isChecked()){
                 pettype = "สุนัข";
 
+
             }else {
                 pettype = "ไม่ระบุ";
+
 
             }
 
@@ -99,14 +101,15 @@ public class PostActivity extends AppCompatActivity {
 
     public void onPost(View view){
 
-        String str_postname = postname.getText().toString();
-        String str_description = description.getText().toString();
-        String str_pettype = pettype;
-        String str_gender = gender;
-        String type = "post";
-        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-        backgroundWorker.execute(type,str_postname,str_description,str_pettype,str_gender);
-    }
+    String str_postname = postname.getText().toString();
+    String str_description = description.getText().toString();
+    String str_pettype = pettype;
+    Log.d("xxxxxxxxxxxx",pettype);
+    String str_gender = gender;
+    String type = "post";
+    BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+    backgroundWorker.execute(type,str_postname,str_description,str_pettype,str_gender);
+}
 
 
 }

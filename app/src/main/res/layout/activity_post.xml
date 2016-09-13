@@ -1,135 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/ptype">
-    <TextView
-        android:textSize="32sp"
-        android:text="Post"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="25dp"
-        android:layout_gravity="center_horizontal" />
-
-    <EditText
-        android:inputType="text"
-        android:id="@+id/etPostName"
-        android:hint="Post Name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
-
-    <EditText
-        android:inputType="text"
-        android:id="@+id/etDescription"
-        android:hint="Description"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="center_horizontal" />
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical">
+        android:layout_height="match_parent">
 
         <TextView
+            android:textSize="32sp"
+            android:text="Post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ชนิด"
-            android:id="@+id/textView8"
-            android:layout_weight="3"
-            android:layout_gravity="center_vertical"
-            android:paddingLeft="20dp" />
+            android:paddingBottom="25dp"
+            android:layout_gravity="center_horizontal" />
 
-        <RadioGroup
+        <EditText
+            android:inputType="text"
+            android:id="@+id/etPostName"
+            android:hint="Post Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:inputType="text"
+            android:id="@+id/etDescription"
+            android:hint="Description"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal" />
+
+        <LinearLayout
             android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/pettype"
-            android:layout_weight="1">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
 
-            <RadioButton
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="แมว"
-                android:id="@+id/radioButton"
+                android:text="ชนิด"
+                android:id="@+id/textView8"
+                android:layout_weight="3"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="20dp" />
+                android:paddingLeft="20dp" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="สุนัข"
-                android:id="@+id/radioButton2"
+                android:orientation="horizontal"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginRight="20dp" />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ไม่ระบุ"
-                android:id="@+id/radioButton3"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="10dp" />
-        </RadioGroup>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="20dp">
+                android:id="@+id/pettype"
+                android:layout_weight="1">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="เพศ"
-            android:id="@+id/textView9"
-            android:layout_weight="3"
-            android:layout_gravity="center_vertical"
-            android:paddingLeft="20dp" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="แมว"
+                    android:id="@+id/radioButton"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp" />
 
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="สุนัข"
+                    android:id="@+id/radioButton2"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="20dp" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ไม่ระบุ"
+                    android:id="@+id/radioButton3"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="10dp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
             android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/gender"
-            android:layout_weight="1">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="20dp">
 
-            <RadioButton
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="เพศผู้"
-                android:id="@+id/radioButton4"
+                android:text="เพศ"
+                android:id="@+id/textView9"
+                android:layout_weight="3"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="20dp" />
+                android:paddingLeft="20dp" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="เพศเมีย"
-                android:id="@+id/radioButton5"
+                android:orientation="horizontal"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginRight="20dp" />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ไม่ระบุ"
-                android:id="@+id/radioButton6"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="10dp" />
-        </RadioGroup>
+                android:id="@+id/gender"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="เพศผู้"
+                    android:id="@+id/radioButton4"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="เพศเมีย"
+                    android:id="@+id/radioButton5"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="20dp" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ไม่ระบุ"
+                    android:id="@+id/radioButton6"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="10dp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btPost"
+            android:text="Post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onPost"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btPost"
-        android:text="Post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onPost"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp" />
-
-</LinearLayout>
+</RelativeLayout>
