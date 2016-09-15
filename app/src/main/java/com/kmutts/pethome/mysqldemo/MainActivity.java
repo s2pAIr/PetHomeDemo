@@ -1,24 +1,31 @@
 package com.kmutts.pethome.mysqldemo;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String MY_PREFS = "my_prefs";
 
     EditText etUsername,etPassword;
-    String session ;
-
+    //String session ;
+    private Session session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(session.getLogin("login",getApplicationContext())){
+            startActivity(new Intent(this,UserCustomListView.class));
+        }
+
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
-
 
     }
     public void OnLogin(View view){

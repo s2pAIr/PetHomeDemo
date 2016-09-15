@@ -26,7 +26,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String>  {
     Context context;
     AlertDialog alertDialog;
     Activity activity;
-
+    Session session;
 
     BackgroundWorker(Context ctx){
         context = ctx;
@@ -43,6 +43,9 @@ public class BackgroundWorker extends AsyncTask<String,Void,String>  {
             try {
                 String user_name = params[1];
                 String password = params[2];
+
+                session.setDefaults("username",user_name,context);
+
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -202,10 +205,13 @@ public class BackgroundWorker extends AsyncTask<String,Void,String>  {
 
         //activity.startActivity(new Intent(activity, PostActivity.class));
         alertDialog.setMessage(result);
-        alertDialog.show();
+        //alertDialog.show();
         if (result.equalsIgnoreCase("successsuccess")) {
+            session.setLogin("login",true,context);
             Intent i = new Intent(context, UserCustomListView.class);
             context.startActivity(i);
+        }else {
+            alertDialog.show();
         }
     }
     @Override

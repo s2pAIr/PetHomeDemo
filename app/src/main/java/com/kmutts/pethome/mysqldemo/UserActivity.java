@@ -42,6 +42,7 @@ public class UserActivity extends AppCompatActivity {
     ActionBarDrawerToggle actionBarDrawerToggle; //Hamburger
     private ProgressDialog progressDialog;
 
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);

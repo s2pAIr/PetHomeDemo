@@ -51,7 +51,7 @@ public class UserCustomListView extends AppCompatActivity {
     int[] resId = {R.drawable.dog01,R.drawable.dog02,R.drawable.dog03,R.drawable.dog04,R.drawable.dog05,R.drawable.cat01,R.drawable.cat02,R.drawable.cat03,R.drawable.cat04,R.drawable.cat05};
     String[] name ={"NameDog01","NameDog02","NameDog03","NameDog04","NameDog05","NameCat01","NameCat02","NameCat03","NameCat04","NameCat05"};
     String[] description = {"DescriptionDog01","DescriptionDog02","DescriptionDog03","DescriptionDog04","DescriptionDog05","DescriptionCat01","DescriptionCat02","DescriptionCat03","DescriptionCat04","DescriptionCat05"};
-
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +59,7 @@ public class UserCustomListView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        Toast.makeText(getApplication(),"Hello "+session.getDefaults("username",getApplicationContext()),Toast.LENGTH_SHORT).show();
 
         initInstances();
         exData = new ArrayList<String>();
@@ -211,6 +212,8 @@ public class UserCustomListView extends AppCompatActivity {
     }
 
     public void goLogout(View view){
+        session.setDefaults("username",null,getApplicationContext());
+        session.setLogin("login",false,getApplicationContext());
         this.finish();
     }
     @Override
