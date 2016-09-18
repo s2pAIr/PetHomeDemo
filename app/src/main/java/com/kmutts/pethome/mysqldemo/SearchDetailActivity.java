@@ -33,10 +33,14 @@ public class SearchDetailActivity extends AppCompatActivity {
     private ArrayList<String> exData;
     private ArrayList<String> exData2;
     private ArrayList<String> exData3;
+    private ArrayList<String> imgUrl;
+    private ArrayList<String> imgPId;
+    private ArrayList<String> reUrl;
     private ProgressDialog progressDialog;
     int[] resId = {R.drawable.dog01,R.drawable.dog02,R.drawable.dog03,R.drawable.dog04,R.drawable.dog05,R.drawable.cat01,R.drawable.cat02,R.drawable.cat03,R.drawable.cat04,R.drawable.cat05};
     String[] name ={"NameDog01","NameDog02","NameDog03","NameDog04","NameDog05","NameCat01","NameCat02","NameCat03","NameCat04","NameCat05"};
     String[] description = {"DescriptionDog01","DescriptionDog02","DescriptionDog03","DescriptionDog04","DescriptionDog05","DescriptionCat01","DescriptionCat02","DescriptionCat03","DescriptionCat04","DescriptionCat05"};
+    int [] re =new int[imgUrl.size()];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,9 @@ public class SearchDetailActivity extends AppCompatActivity {
         exData = new ArrayList<String>();
         exData2 = new ArrayList<String>();
         exData3 = new ArrayList<String>();
+        imgUrl = new ArrayList<String>();
+        imgPId = new ArrayList<String>();
+        reUrl = new ArrayList<String>();
 
         new AsyncTask<Void,Void,Void>(){
 
@@ -98,6 +105,42 @@ public class SearchDetailActivity extends AppCompatActivity {
                         exData2.add(jsonObj.getString("description"));
                         exData3.add(jsonObj.getString("id"));
                     }
+                    url = new URL("http://pethome.kmutts.com/upload_json.php");
+
+                    urlConnection = url.openConnection();
+
+                    httpURLConnection = (HttpURLConnection) urlConnection;
+                    httpURLConnection.setAllowUserInteraction(false);
+                    httpURLConnection.setInstanceFollowRedirects(true);
+                    httpURLConnection.setRequestMethod("GET");
+                    httpURLConnection.connect();
+
+                    inputStream = null;
+
+                    if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK)
+                        inputStream = httpURLConnection.getInputStream();
+
+                    reader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"), 8);
+
+                    stringBuilder = new StringBuilder();
+                    line = null;
+
+                    while ((line = reader.readLine()) != null) {
+                        stringBuilder.append(line + "\n");
+                    }
+                    inputStream.close();
+                    Log.d("JSON Result", stringBuilder.toString());
+
+                    jsonObject = new JSONObject(stringBuilder.toString());
+                    exArray = jsonObject.getJSONArray("result");
+
+                    for (int i = 0; i < exArray.length(); i++) {
+                        JSONObject jsonObj = exArray.getJSONObject(i);
+                        imgUrl.add(jsonObj.getString("image"));
+                        imgPId.add(jsonObj.getString("post_id"));
+                        //Log.d("id",jsonObj.getString("id"));
+                        //Log.d("size",postName.size()+"");
+                    }
 
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -114,7 +157,7 @@ public class SearchDetailActivity extends AppCompatActivity {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 ListView listView = (ListView) findViewById(R.id.json_listview);
-                CustomAdapter adapter = new CustomAdapter(getApplicationContext(),exData.toArray(new String[exData.size()]),exData2.toArray(new String[exData2.size()]),resId,exData3.toArray(new String[exData3.size()]));
+                CustomAdapter adapter = new CustomAdapter(getApplicationContext(),exData.toArray(new String[exData.size()]),exData2.toArray(new String[exData2.size()]),reUrl.toArray(new String[reUrl.size()]),exData3.toArray(new String[exData3.size()]));
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override

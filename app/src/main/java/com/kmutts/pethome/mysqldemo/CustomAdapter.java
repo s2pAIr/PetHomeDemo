@@ -1,12 +1,25 @@
 package com.kmutts.pethome.mysqldemo;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * Created by ADMIN PC on 12/9/2559.
@@ -16,14 +29,17 @@ public class CustomAdapter extends BaseAdapter {
     String[] strName;
     String[] strDescription;
     String [] id;
-    int[] resId;
+    String [] reUrl;
+    int[] reId;
+
     //
 
-    public CustomAdapter(Context context, String[] strName,String[] strDescription, int[] resId,String[] id) {
+    public CustomAdapter(Context context, String[] strName,String[] strDescription, String[] reUrl,String[] id) {
         this.mContext= context;
         this.strName = strName;
         this.strDescription = strDescription;
-        this.resId = resId;
+        this.reUrl = reUrl;
+        this.reId = reId;
         this.id = id;
     }
 
@@ -55,10 +71,43 @@ public class CustomAdapter extends BaseAdapter {
         TextView tvDescription = (TextView) view.findViewById(R.id.tvDescription);
         tvDescription.setText(strDescription[position]);
 
-        ImageView ivImg = (ImageView) view.findViewById(R.id.ivImg);
-        ivImg.setBackgroundResource(resId[1]);
+
+
+
+        ImageView ivImg = (ImageView)view.findViewById(R.id.ivImg);
+        new DownloadImageTask(ivImg).execute(reUrl[position]);
+
+        //ivImg.setBackgroundResource(reId[position]);
+        //Log.d("j","koko");
         view.setTag(id[position]);
-        //View view = mInflater.inflate(R.layout.list_item_photo,parent,false);
+        //Log.d("gg",id[position]);
+        //View view = mInflater.inflate(R.layout.list_item_photo,parent,false);*/
         return view;
     }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
+
 }

@@ -11,17 +11,6 @@
         android:text="Post"
         android:textSize="32sp" />
 
-    <Button
-        android:id="@+id/buttonChooseImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Choose Image" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
-
     <EditText
         android:id="@+id/etPostName"
         android:layout_width="match_parent"
@@ -37,6 +26,31 @@
         android:layout_gravity="center_horizontal"
         android:hint="Description"
         android:inputType="text" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgurl"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:hint="url" />
+
+        <Button
+            android:id="@+id/buttonChooseImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose Image"
+            android:onClick="onUpload"
+            android:layout_weight="2"
+            android:nestedScrollingEnabled="false" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -37,7 +37,12 @@ public class DetailActivity extends AppCompatActivity {
     private ArrayList<String> exData3;
     private ArrayList<String> exData4;
     private ArrayList<String> exData5;
+    private ArrayList<String> exData6;
     private ArrayList<String> commentdata;
+    private ArrayList<String> commentUsername;
+    private ArrayList<String> postId;
+    int[] resId = {R.drawable.dog01,R.drawable.dog02,R.drawable.dog03,R.drawable.dog04,R.drawable.dog05,R.drawable.cat01,R.drawable.cat02,R.drawable.cat03,R.drawable.cat04,R.drawable.cat05};
+    Session useID;
      int mealId = -1;
     private ProgressDialog progressDialog;
     EditText comm;
@@ -49,7 +54,11 @@ public class DetailActivity extends AppCompatActivity {
         exData3 = new ArrayList<String>();
         exData4 = new ArrayList<String>();
         exData5 = new ArrayList<String>();
+        exData6 = new ArrayList<String>();
+        commentUsername = new ArrayList<String>();
         commentdata = new ArrayList<String>();
+        postId = new ArrayList<String>();
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
@@ -115,6 +124,8 @@ public class DetailActivity extends AppCompatActivity {
                         exData3.add(jsonObj.getString("id"));
                         exData4.add(jsonObj.getString("pettype"));
                         exData5.add(jsonObj.getString("gender"));
+                        exData6.add(jsonObj.getString("username"));
+
 
                     }
                      url = new URL("http://pethome.kmutts.com/comment_json.php");
@@ -147,16 +158,18 @@ public class DetailActivity extends AppCompatActivity {
                         stringBuilder.append(line + "\n");
                     }
                     inputStream.close();
-                    Log.d("JSON Result", stringBuilder.toString());
+                    //Log.d("JSON Result", stringBuilder.toString());
 
                      jsonObject = new JSONObject(stringBuilder.toString());
                      exArray = jsonObject.getJSONArray("result");
-
+                    //Log.d("gg","wp");
                     for (int i = 0; i < exArray.length(); i++) {
 
                         JSONObject jsonObj = exArray.getJSONObject(i);
                         commentdata.add(jsonObj.getString("comment"));
-
+                        commentUsername.add(jsonObj.getString("username"));
+                        postId.add(jsonObj.getString("id"));
+                        Log.d("gg",jsonObj.getString("id"));
                     }
 
 
@@ -177,12 +190,15 @@ public class DetailActivity extends AppCompatActivity {
                 int x = -1;
                 ListView listView = (ListView) findViewById(R.id.listView);
                 //listView.smoothScrollToPosition(arr.getCount‌​() - 1);
-                ArrayAdapter<String> arr = new ArrayAdapter<String>(DetailActivity.this,android.R.layout.simple_list_item_1,commentdata);
-                listView.setAdapter(arr);
+                //ArrayAdapter<String> arr = new ArrayAdapter<String>(DetailActivity.this,android.R.layout.simple_list_item_1,commentdata);
+                //listView.setAdapter(arr);
+                CustomComment adapter = new CustomComment(getApplicationContext(),commentUsername.toArray(new String[commentUsername.size()]),commentdata.toArray(new String[commentdata.size()]),resId,postId.toArray(new String[postId.size()]));
+                listView.setAdapter(adapter);
                 TextView text1 = (TextView) findViewById(R.id.textView3);
                 TextView text2 = (TextView) findViewById(R.id.textView4);
                 TextView text3 = (TextView) findViewById(R.id.textView6);
                 TextView text4 = (TextView) findViewById(R.id.textView7);
+                TextView dtUse = (TextView) findViewById(R.id.dtUsername);
                 for(int i =0;i<exData.size();i++){
                    if((mealId+"").equals(exData3.get(i))){
                        x = i;
@@ -193,6 +209,7 @@ public class DetailActivity extends AppCompatActivity {
                 text2.setText(exData2.get(x)+"");
                 text3.setText("ชนิด : "+exData4.get(x));
                 text4.setText("เพศ :  "+exData5.get(x));
+                dtUse.setText("ผู้โพส :  "+exData6.get(x));
                 progressDialog.dismiss();
             }
 
@@ -200,10 +217,19 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void onComment(View view){
+        int first = (int)((Math.random() *10)+1);
+        int second = (int)((Math.random() *10)+1);
+        int third = (int)((Math.random() *10)+1);
         String comment = comm.getText().toString();
         String postid = mealId+"";
+        //Log.d("id",mealId+"");
         String type = "comment";
-        String username = fakeuseId;
+        String username;
+        if(useID.getLogin("login",getApplicationContext())){
+            username = useID.getDefaults("username",getApplicationContext());
+        }else{
+            username = "guest"+first+second+third;
+        }
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
         backgroundWorker.execute(type ,username,comment,postid);
     }

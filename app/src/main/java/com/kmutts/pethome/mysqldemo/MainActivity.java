@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         if(session.getLogin("login",getApplicationContext())){
             //startActivity(new Intent(this,UploadActivity.class));
             startActivity(new Intent(this,UserCustomListView.class));
