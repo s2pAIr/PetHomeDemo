@@ -1,10 +1,7 @@
 package com.kmutts.pethome.mysqldemo;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if(session.getLogin("login",getApplicationContext())){
+            //startActivity(new Intent(this,UploadActivity.class));
             startActivity(new Intent(this,UserCustomListView.class));
         }
 
@@ -50,4 +48,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this,GuestActivity.class));
     }
 
+    public void onPhoto(View view){
+        startActivity(new Intent(this,UploadActivity.class));
+    }
 }

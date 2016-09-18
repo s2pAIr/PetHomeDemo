@@ -1,15 +1,9 @@
 package com.kmutts.pethome.mysqldemo;
 
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -21,10 +15,10 @@ import android.widget.RadioGroup;
 public class PostActivity extends AppCompatActivity {
     EditText postname,description;
     RadioGroup g1;
-    RadioButton r11 ;
+    RadioButton r11;
     RadioButton r12;
     RadioButton r13;
-    RadioButton r21 ;
+    RadioButton r21;
     RadioButton r22;
     RadioButton r23;
     private String pettype;
